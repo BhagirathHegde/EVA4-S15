@@ -42,7 +42,15 @@ This was done to keep our dataset to a minimum size for further computations.
 
 :arrow_right: **Dataloader:**
 - Then called the DataLoader item twice - once for train set and once for validation set
-- First, I experimented for images of size (resized) 64x64 (to test with reduces size images) - for this I gave a larger batch_size of about 128
+- First, I experimented for images of size (resized) 64x64 (to test with reduced size images) - for this I gave a larger batch_size of about 128
 - This worked well , and was faster
 - Then as for transfer learning, I did not resize the images but had to reduce batch_size greatly and made it 32 (so that cuda does not run out of memory)
 - This completed the data loading process 
+
+:arrow_right: **UNet model:**
+- So after trying various model available, I choose to work with UNet model
+- Architecture of model:
+
+
+
+:arrow_right: **Display Images:**
