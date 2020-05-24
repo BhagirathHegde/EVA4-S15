@@ -50,7 +50,7 @@ This was done to keep our dataset to a minimum size for further computations.
 :arrow_right: **UNet model:**
 - So after trying various model available, I choose to work with UNet model
 - Architecture of model:
-![Architecture of model:](u-net-architecture.png)
+![Architecture of model:](UNet-arch.jpg)
 
 
 :arrow_right: **Display Images:**
