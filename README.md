@@ -138,9 +138,13 @@ model.load_state_dict(torch.load('/content/gdrive/My Drive/model_mask_1.pth'))
 ```
 :arrow_right: **Outputs:**
 
-DEPTH - Ground truth and Output for training (epoch 4)
+1) DEPTH 
+  -Ground truth and Output for training (epoch 4)
 
-![GT]()
+![GT](Depth_epoch4_groundtruth.PNG)                                       ![Training](Depth_epoch4_training.PNG)   
+
+  -Ground truth and Output for testing (epoch 3)
+![GT](Depth_epoch3_groundtruth.PNG)                                       ![GT](Depth_epoch3_testing.PNG)
 
 :end: At the end I just prayed that all goes well and this project turns out to be a huge learning path and helps me cross many more hurdles in life :pray:
 
