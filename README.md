@@ -12,7 +12,7 @@ All our images are in .jpg format
 This was done to keep our dataset to a minimum size for further computations.
 
 :arrow_right: **Fetching the Data:**
-- So the biggest challenge of this assignment was how to load such huge amount of data ?
+- So the biggest challenge of this assignment was how to load such huge amount of data :question:
 - First, I tried to load a small amount of data (say 20 images of each kind) into colab
 - Then I tried to convert them into numpy arrays and tried to store them in a list - since we have to input 4 kind of images
 - After storing in a list, when I tried to retrieve the images via these numpy arrays, I landed up in a lot of errors due to channel mis-match and resizing issues
@@ -20,8 +20,21 @@ This was done to keep our dataset to a minimum size for further computations.
 - Then I decided to finally change my approach and restarted the whole assignment from scratch
 - This time I thought of loading the paths of the dataset into colab instead of saving them in a list and converting to arrays etc
 - I stored the paths of the 4 kinds of images in variables and extracted each of these paths locally into colab
+
+Code Snippet:
+```
+archive1 = zipfile.ZipFile(f'/content/gdrive/My Drive/Mask_Rcnn/Dataset/data_part1.zip')
+archive1.extractall()
+```
+- Also created a Background folder and loaded 100 bg images into colab
+- I saved all of these folders into variables to be used later
+
+Code Snippet:
+```
+bg = sorted(glob.glob('/content/Background/*',recursive=True)) 
+```
 - This saves a lot of time and RAM , it just takes 3-4 mins to extract the zip files into colab without eating away any RAM space
-- Such a relief, I could finally get hold of the dataset
+- Such a relief, I could finally get hold of the data :sweat_smile:
 
 :arrow_right: **Custom Dataset class:**
 - I wrote a class named CustomDataset
@@ -32,9 +45,15 @@ This was done to keep our dataset to a minimum size for further computations.
 - Code snippet:
 - Also if any transforms were available, the transforms would be applied to the images at this point in the code
 
-:arrow_right: **Albumentations:**
+:arrow_right: **Albumentations:** :rainbow:
+- I did not huge any heavy or too many transforms
+- Just used resize to first run the model on 64x64 size images
+- Then changed the resize function to 224x224 image size, this was done so that I experiment on small resolution images first and then     go for the bigger ones
+- Apart from that I have added ColorJitter()
+- Normalised with the mean and std of Fg-Bg images which we had calculated for the previous assignment
+- At last converted to ToTensor
 
-:arrow_right: **Train Test Split:**
+:arrow_right: **Train Test Split:** :scissors:
 - So the requirement was to split the whole 400k dataset into 70:30 :: train:test
 - As we had also done this for imagenet dataset in previous assignment, I implemented it in the same way
 - First I split the len() of whole dataset into 70% and then the remaining 30% would be the test data
@@ -42,7 +61,7 @@ This was done to keep our dataset to a minimum size for further computations.
 - However, this was generating random images for every batch and so I had to use SEED: timetorch.manual_seed(0) so that a fixed set of images are generated per batch
 - And then applied random_split() after SEED
 
-:arrow_right: **Dataloader:**
+:arrow_right: **Dataloader:** 
 - Then called the DataLoader item twice - once for train set and once for validation set
 - First, I experimented for images of size (resized) 64x64 (to test with reduced size images) - for this I gave a larger batch_size of about 128
 - This worked well , and was faster
