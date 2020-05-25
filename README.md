@@ -36,7 +36,7 @@ bg = sorted(glob.glob('/content/Background/*',recursive=True))
 - This saves a lot of time and RAM , it just takes 3-4 mins to extract the zip files into colab without eating away any RAM space
 - Such a relief, I could finally get hold of the data :sweat_smile:
 
-:arrow_right: **Custom Dataset class:**
+:arrow_right: **Custom Dataset class:** :scroll:
 - I wrote a class named CustomDataset
 - It contains __init__ method to initialise the transforms and also the 4 file paths which were created with the 4 types of files
 - Also containts __len__ to store fg_bg length
@@ -60,14 +60,14 @@ bg = sorted(glob.glob('/content/Background/*',recursive=True))
 - However, this was generating random images for every batch and so I had to use SEED: timetorch.manual_seed(0) so that a fixed set of images are generated per batch
 - And then applied random_split() after SEED
 
-:arrow_right: **Dataloader:** 
+:arrow_right: **Dataloader:** :repeat: 
 - To load the data I called the DataLoader item twice - once for train set and once for validation set
 - First, I experimented for images of size (resized) 64x64 (to test with reduced size images) - for this I gave a larger batch_size of about 128
 - This worked well , and was faster
 - Then as for transfer learning, I did not resize the images but had to reduce batch_size greatly and made it 32 (so that cuda does not run out of memory)
 - This completed the data loading process 
 
-:arrow_right: **UNet model:**
+:arrow_right: **UNet model:** :boom:
 - Link to my model: 
 - So after trying various models available, I choose to work with UNet model
 - I tried using ResNet like our previous assignments and also various types of Autoencoders - but the results never looked good and I had lot of difficulties dealing with the input data
@@ -116,12 +116,12 @@ for child in model.children():
 - Finally the model would return logits_mask if we are running model for mask images or it would return logits_depth if we are running model for depth images
 - So this is all about the model. It was not that easy, with a lot of research and trail and error these changes were made :performing_arts:
 
-:arrow_right: **Display Images:**
+:arrow_right: **Display Images:** :framed_picture:
 - Wrote a small function to display the images of any kind by just calling the display_image(img) function
 - Example of fg-bg images:  1[fg-bg](fg-bg-image)
 
 
-:arrow_right: **Train and Test:**
+:arrow_right: **Train and Test:** :running:
 - Train and test functions do not change much, they are similar to what we used in previous assignments
 - In these functions we load each of the 4 types of images (background, fg-bg, fg-bg-mask and depth images)
 - And then here comes another hurdle................ :construction:
@@ -162,7 +162,7 @@ Code Snippet:
 torch.save(model, '/content/gdrive/My Drive/model_mask_1.pth')
 model.load_state_dict(torch.load('/content/gdrive/My Drive/model_mask_1.pth'))
 ```
-:arrow_right: **Outputs:**
+:arrow_right: **Outputs:** :heart_eyes:
 
 1) __DEPTH__
 
