@@ -22,7 +22,7 @@
 
 :arrow_right: **Files Used:**
 1) [All Models](my_model.py)
-2) [Albumentation Transforms](Transforms.py)
+2) [Albumentation Transforms](Albumentations.py)
 3) [Splitting the dataset](SplitDataset.py)
 4) [Display Images](DisplayImages.py)
 5) [Custom Dataset](MyClass.py)
@@ -59,6 +59,7 @@ bg = sorted(glob.glob('/content/Background/*',recursive=True))
 - Such a relief, I could finally get hold of the data :sweat_smile:
 
 :arrow_right: **Custom Dataset class:** :scroll:
+- [Link to dataset](MyClass.py)
 - I wrote a class named CustomDataset
 - It contains __init__ method to initialise the transforms and also the 4 file paths which were created with the 4 types of files
 - Also containts __len__ to store fg_bg length :straight_ruler:
@@ -67,6 +68,7 @@ bg = sorted(glob.glob('/content/Background/*',recursive=True))
 - Also if any transforms were available, the transforms would be applied to the images at this point in the code
 
 :arrow_right: **Albumentations:** :rainbow:
+- [Link to Albumentation Transforms](Albumentations.py)
 - I did not use too many transforms
 - Just used resize to first run the model on 64x64 size images
 - Then changed the resize function to 224x224 image size, this was done so that I experiment on small resolution images first and then     go for the bigger ones
@@ -75,6 +77,7 @@ bg = sorted(glob.glob('/content/Background/*',recursive=True))
 - At last converted to ToTensor
 
 :arrow_right: **Train Test Split:** :scissors:
+- [Link to splitting the dataset](SplitDataset.py)
 - So the requirement was to split the whole 400k dataset into 70:30 :: train:test
 - As we had also done this for imagenet dataset in previous assignment, I implemented it in the same way
 - First I split the len() of whole dataset into 70% and then the remaining 30% would be the test data :bar_chart:
@@ -90,6 +93,7 @@ bg = sorted(glob.glob('/content/Background/*',recursive=True))
 - This completed the data loading process :relieved: 
 
 :arrow_right: **UNet model:** :boom:
+- [Link to UNet Model](UNetModel.py)
 - Link to my model: 
 - So after trying various models available, I choose to work with UNet model :heavy_check_mark:
 - I tried using ResNet like our previous assignments and also various types of Autoencoders - but the results never looked good and I had lot of difficulties dealing with the input data
@@ -139,11 +143,13 @@ for child in model.children():
 - So this is all about the model. It was not that easy, with a lot of research and trail and error these changes were made :performing_arts:
 
 :arrow_right: **Display Images:** :framed_picture:
+- [Link to Display Images](DisplayImages.py)
 - Wrote a small function to display the images of any kind by just calling the display_image(img) function
 - Example of fg-bg images:  1[fg-bg](fg-bg-image)
 
 
 :arrow_right: **Train and Test:** :running:
+- 
 - Train and test functions do not change much, they are similar to what we used in previous assignments
 - In these functions we load each of the 4 types of images (background, fg-bg, fg-bg-mask and depth images)
 - And then here comes another hurdle................ :construction:
