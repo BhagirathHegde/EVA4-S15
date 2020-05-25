@@ -145,7 +145,8 @@ for child in model.children():
 :arrow_right: **Display Images:** :framed_picture:
 - [Link to Display Images](DisplayImages.py)
 - Wrote a small function to display the images of any kind by just calling the display_image(img) function
-- Example of fg-bg images:  ![fg-bg](fg-bg-image)
+- Example of fg-bg images:  
+![fg-bg](fg-bg-image.PNG)
 
 
 :arrow_right: **Train and Test:** :running:
