@@ -57,6 +57,7 @@ This was done to keep our dataset to a minimum size for further computations.
 - No dense layer in UNet model, so images of different sizes can be used as input - So I first tried running the model on 64x64 size images and then switched to the 224x224 images of our dataset (transfer learning)
 - The only change I had to make was pass two images in the model summary instead of one (which we were passing earlier)
 ```summary(model, input_size=[(3,64,64),(3,64,64)])```
+- **No. of parameters: 33,389,314**
 - Architecture of model:
 
 ![Architecture of model](UNet-arch.jpg)
@@ -71,7 +72,9 @@ These skip connections intend to provide local information to the global informa
 U-Net architecture is separated in 3 parts:
 
   :small_blue_diamond: The contracting/downsampling path
+  
   :small_blue_diamond: Bottleneck
+  
   :small_blue_diamond: The expanding/upsampling path
 
 :sunglasses: However, for our assignement, I have made a few changes in the model:
