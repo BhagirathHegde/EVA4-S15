@@ -54,13 +54,14 @@ This was done to keep our dataset to a minimum size for further computations.
 - So after trying various model available, I choose to work with UNet model
 - Architecture of model:
 
+![Architecture of model](UNet-arch.jpg)
+
 The U-Net architecture is built upon the Fully Convolutional Network and modified in a way that it yields better segmentation in medical imaging. Compared to FCN-8, the two main differences are 
 
 (1) U-net is symmetric and  
-(2) the skip connections between the downsampling path and the upsampling path apply a concatenation operator instead of a sum. 
-These skip connections intend to provide local information to the global information while upsampling. Because of its symmetry, the network has a large number of feature maps in the upsampling path, which allows to transfer information. By comparison, the basic FCN architecture only had number of classes feature maps in its upsampling path.
+(2) the skip connections between the downsampling path and the upsampling path apply a concatenation operator instead of a sum.
 
-The U-Net owes its name to its symmetric shape, which is different from other FCN variants.
+These skip connections intend to provide local information to the global information while upsampling. Because of its symmetry, the network has a large number of feature maps in the upsampling path, which allows to transfer information. By comparison, the basic FCN architecture only had number of classes feature maps in its upsampling path. The U-Net owes its name to its symmetric shape, which is different from other FCN variants.
 
 U-Net architecture is separated in 3 parts:
 
@@ -68,10 +69,25 @@ U-Net architecture is separated in 3 parts:
 2) Bottleneck
 3) The expanding/upsampling path
 
-![Architecture of model:] (UNet-arch.jpg)
 
 - However, for our assignement, I have made a few changes in the model:
-
+1) I first have some common layers for both depth and mask images (common layers I choose are: down1, down2 and down3)
+2) Then I split the layers into two - one set for mask and another set for depth images
+3) For this I choose the remaining layers and changed the sizes accordingly so that it duplicated the UNet architecture
+4) While running the model for depth images, I first frooze the mask layers which were newly created the ran the model and obtained the results. 
+5) While running the model for mask images, I frooze the depth layers which were newely created and ran the model to obtain results
+6) To freeze the code, used this code:
+'''
+#Freeze the layers
+count = 0
+for child in model.children():
+   count += 1
+   if count < 4 or count > 10:
+     for param in child.parameters():
+         param.requires_grad = False
+'''
+7) Finally the model would return logits_mask if we are running model for mask images or it would return logits_depth if we are running model for depth images
+- So this is all about the model. It was not that easy, with a lot of research and trail and error these changes were made :performing_arts:
 
 
 :arrow_right: **Display Images:**
