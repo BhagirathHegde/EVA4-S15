@@ -207,7 +207,7 @@ model.load_state_dict(torch.load('/content/gdrive/My Drive/model_mask_1.pth'))
 
   -**Ground truth** and Output for **Training** (epoch 3)
 
-![GT]()                                               ![Training]()   
+![GT](mask_epoch3_groundtruth.PNG)                                               ![Training](Mask_epoch3_training.PNG)   
 
   -**Ground truth** and Output for **Testing** (epoch 3)
   
