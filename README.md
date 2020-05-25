@@ -4,7 +4,7 @@
 
 :link: Link to how the Dataset was created: https://github.com/Deeksha-Pandit/EVA4-S14/blob/master/Final/README.md 
 
-:link: Link to colab notebook for assignment 15: 
+:link: Link to colab notebook for assignment 15: https://github.com/Deeksha-Pandit/EVA4-S15/blob/master/Final_Assignment.ipynb
 
 :pushpin: __Highlights__
  1) Dataset - Custom dataset containing living rooms as background and humans as foreground
@@ -19,6 +19,7 @@
  4) Model - UNet 
  5) No. of parameters - 33,389,314
  6) Epochs - Depth: 4 epochs , Masks: 3 epochs
+ 7) Iou Results ~ 0.8109732806682587
 
 :arrow_right: **Files Used:**
 1) [All Models](my_model.py)
@@ -153,9 +154,9 @@ for child in model.children():
 
 
 :arrow_right: **Train and Test:** :running:
-- 
 - Train and test functions do not change much, they are similar to what we used in previous assignments
 - In these functions we load each of the 4 types of images (background, fg-bg, fg-bg-mask and depth images)
+- I also changes the test() code a little to include the IoU metric to measure the accuracy of our model
 - And then here comes another hurdle................ :construction:
 - We had to decide upon the hyperparameters for the training and testing, that would work perfectly with our model :thinking:
 **LOSS FUNCTIONS:**
@@ -217,7 +218,8 @@ model.load_state_dict(torch.load('/content/gdrive/My Drive/model_mask_1.pth'))
 ![GT](mask_epoch3_groundtruth1.PNG)                                                ![Testing](Mask_epoch3_testing.PNG)
 
 :arrow_right: **Results:** :smile:
-
+- Iou Results: Average Metric =  0.8109732806682587
+- RMSE Results: Average Metric =  0.6715668320655823
 
 :end: At the end I just prayed that all goes well. This project turned out to be a huge learning path. It will definetly help me cross many more hurdles in life :pray:
 
