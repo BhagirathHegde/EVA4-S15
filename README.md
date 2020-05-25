@@ -92,8 +92,16 @@ for child in model.children():
          param.requires_grad = False
 ```
 
-7) Finally the model would return logits_mask if we are running model for mask images or it would return logits_depth if we are running model for depth images
+- Finally the model would return logits_mask if we are running model for mask images or it would return logits_depth if we are running model for depth images
 - So this is all about the model. It was not that easy, with a lot of research and trail and error these changes were made :performing_arts:
 
+:arrow_right: **Train and Test:**
+- Train and test functions do not change much, they are similar to what we used in previous assignments
+- In these functions we load each of the 4 types of images (background, fg-bg, fg-bg-mask and depth images)
+- And then here comes another hurdle................ :construction:
+- We had to decide upon the hyperparameters for the training and testing, that would work perfectly with our model :thinking:
+- I tried with quite a few loss functions:
+  1) MSELoss() - Did not give good results
+  2) CrossEntropyLoss() - Did not fit best for our dataset images
+  3) BCEWithLogitsLoss() - This worked best for mask images and this is the loss function I used for mask images , but for depth images   it gve this kind of output: 
 
-:arrow_right: **Display Images:**
