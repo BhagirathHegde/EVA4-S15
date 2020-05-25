@@ -140,21 +140,21 @@ model.load_state_dict(torch.load('/content/gdrive/My Drive/model_mask_1.pth'))
 
 1) __DEPTH__
 
-  -Ground truth and Output for training (epoch 4)
+  -Ground truth                                  Output for training (epoch 4)
 
 ![GT](Depth_epoch4_groundtruth.PNG)                                                ![Training](Depth_epoch4_training.PNG)   
 
-  -Ground truth and Output for testing (epoch 3)
+  -Ground truth                                  Output for testing (epoch 3)
   
 ![GT](Depth_epoch3_groundtruth.PNG)                                                ![Testing](Depth_epoch3_testing.PNG)
 
-1) __MASK__
+2) __MASK__
 
-  -Ground truth and Output for training (epoch 3)
+  -Ground truth                                  Output for training (epoch 3)
 
 ![GT]()                                               ![Training]()   
 
-  -Ground truth and Output for testing (epoch 3)
+  -Ground truth                                  Output for testing (epoch 3)
   
 ![GT]()                                                ![Testing]()
 
