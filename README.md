@@ -1,8 +1,22 @@
 # Final Assignment 
   
-:arrow_right: Link to Custom Dataset: https://drive.google.com/drive/folders/1RbJHVxo91jhekv3_E9GZvujUDNDaxFQu
+:link: Link to Custom Dataset: https://drive.google.com/drive/folders/1RbJHVxo91jhekv3_E9GZvujUDNDaxFQu
 
-:arrow_right: Link to how the Dataset was created: https://github.com/Deeksha-Pandit/EVA4-S14/blob/master/Final/README.md 
+:link: Link to how the Dataset was created: https://github.com/Deeksha-Pandit/EVA4-S14/blob/master/Final/README.md 
+
+:pushpin: __Highlights__
+  1) Dataset - Custom dataset containing living rooms as background and humans as foreground
+  2) Input 
+    - Background Images (100)
+    - Foreground-Background Images (400K)
+    - Foreground-Background-Mask Images (400K)
+    - Depth Images (400K)
+  3) Output
+    - Foreground-Background-Mask
+    - Depth Images
+  4) Model - UNet 
+  5) No. of parameters - 33,389,314
+  6) Epochs - Depth: 4 epochs , Masks: 3 epochs
 
 :arrow_right: **Files Used:**
 
