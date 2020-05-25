@@ -1,4 +1,6 @@
 # Final Assignment 
+
+# Monocular Mask and Depth Estimation Model
   
 :link: Link to Custom Dataset: https://drive.google.com/drive/folders/1RbJHVxo91jhekv3_E9GZvujUDNDaxFQu
 
@@ -60,7 +62,7 @@ bg = sorted(glob.glob('/content/Background/*',recursive=True))
 - Such a relief, I could finally get hold of the data :sweat_smile:
 
 :arrow_right: **Custom Dataset class:** :scroll:
-- [Link to dataset](MyClass.py)
+- [Code to custom dataset class](MyClass.py)
 - I wrote a class named CustomDataset
 - It contains __init__ method to initialise the transforms and also the 4 file paths which were created with the 4 types of files
 - Also containts __len__ to store fg_bg length :straight_ruler:
@@ -78,7 +80,7 @@ bg = sorted(glob.glob('/content/Background/*',recursive=True))
 - At last converted to ToTensor()
 
 :arrow_right: **Train Test Split:** :scissors:
-- [Link to splitting the dataset](SplitDataset.py)
+- [Code to splitting the dataset](SplitDataset.py)
 - So the requirement was to split the whole 400k dataset into 70:30 :: train:test
 - As we had also done this for imagenet dataset in previous assignment, I implemented it in the same way
 - First I split the len() of whole dataset into 70% and then the remaining 30% would be the test data :bar_chart:
@@ -94,7 +96,7 @@ bg = sorted(glob.glob('/content/Background/*',recursive=True))
 - This completed the data loading process :relieved: 
 
 :arrow_right: **UNet model:** :boom:
-- [Link to UNet Model](UNetModel.py)
+- [Code to UNet Model](UNetModel.py)
 - Link to my model: 
 - So after trying various models available, I choose to work with UNet model :heavy_check_mark:
 - I tried using ResNet like our previous assignments and also various types of Autoencoders - but the results never looked good and I had lot of difficulties dealing with the input data
@@ -147,9 +149,9 @@ for child in model.children():
 - So this is all about the model. It was not that easy, with a lot of research and trail and error these changes were made :performing_arts:
 
 :arrow_right: **Display Images:** :framed_picture:
-- [Link to Display Images](DisplayImages.py)
+- [Code to Display Images](DisplayImages.py)
 - Wrote a small function to display the images of any kind by just calling the display_image(img) function
-- Example of fg-bg images:  
+- Example of fg-bg images after applying transforms:  
 ![fg-bg](fg-bg-image.PNG)
 
 
