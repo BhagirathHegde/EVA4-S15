@@ -22,12 +22,12 @@
  7) Iou Results ~ 0.8109732806682587
 
 :arrow_right: **Files Used:**
-1) [All Models](my_model.py)
-2) [Albumentation Transforms](Albumentations.py)
-3) [Splitting the dataset](SplitDataset.py)
-4) [Display Images](DisplayImages.py)
-5) [Custom Dataset](MyClass.py)
-6) [UNet Model](UNetModel.py)
+1) [All Models](my_model.py) - Contains all models used in EVA4 until now
+2) [Albumentation Transforms](Albumentations.py) - Contains the transforms used in this assignment
+3) [Splitting the dataset](SplitDataset.py) - Contains code to split dataset into train and test set
+4) [Display Images](DisplayImages.py) - Contains code to display various kinds of images
+5) [Custom Dataset](MyClass.py) - Contains Custom dataset class 
+6) [UNet Model](UNetModel.py) - Conatins the model used in this particular assignment
 
 :arrow_right: **Data Formats:**
 
@@ -75,7 +75,7 @@ bg = sorted(glob.glob('/content/Background/*',recursive=True))
 - Then changed the resize function to 224x224 image size, this was done so that I experiment on small resolution images first and then     go for the bigger ones
 - Apart from that I have added ColorJitter() :tada:
 - Normalised with the mean and std of Fg-Bg images which we had calculated for the previous assignment
-- At last converted to ToTensor
+- At last converted to ToTensor()
 
 :arrow_right: **Train Test Split:** :scissors:
 - [Link to splitting the dataset](SplitDataset.py)
