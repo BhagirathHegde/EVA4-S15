@@ -141,7 +141,8 @@ for child in model.children():
 
 - Finally the model would return logits_mask if we are running model for mask images or it would return logits_depth if we are running model for depth images
 - Modified model flow chart:
-![UNet Arch](UNet_modified.png)
+
+![UNet Arch](UNet_flowchart2.png)
 - So this is all about the model. It was not that easy, with a lot of research and trail and error these changes were made :performing_arts:
 
 :arrow_right: **Display Images:** :framed_picture:
