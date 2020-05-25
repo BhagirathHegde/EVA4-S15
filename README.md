@@ -216,6 +216,9 @@ model.load_state_dict(torch.load('/content/gdrive/My Drive/model_mask_1.pth'))
   
 ![GT](mask_epoch3_groundtruth1.PNG)                                                ![Testing](Mask_epoch3_testing.PNG)
 
+:arrow_right: **Results:** :smile:
+
+
 :end: At the end I just prayed that all goes well. This project turned out to be a huge learning path. It will definetly help me cross many more hurdles in life :pray:
 
 Thank you so much :blush:
