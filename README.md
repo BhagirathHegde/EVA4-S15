@@ -7,23 +7,26 @@
 :link: Link to colab notebook for assignment 15: 
 
 :pushpin: __Highlights__
-  1) Dataset - Custom dataset containing living rooms as background and humans as foreground
-  2) Input 
-  
+ 1) Dataset - Custom dataset containing living rooms as background and humans as foreground
+ 2) Input 
     - Background Images (100) 
     - Foreground-Background Images (400K)
     - Foreground-Background-Mask Images (400K)
     - Depth Images (400K)
-  3) Output
-  
+ 3) Output
     - Foreground-Background-Mask
     - Depth Images
-  4) Model - UNet 
-  5) No. of parameters - 33,389,314
-  6) Epochs - Depth: 4 epochs , Masks: 3 epochs
+ 4) Model - UNet 
+ 5) No. of parameters - 33,389,314
+ 6) Epochs - Depth: 4 epochs , Masks: 3 epochs
 
 :arrow_right: **Files Used:**
-
+1) [All Models](my_model.py)
+2) [Albumentation Transforms](Transforms.py)
+3) [Splitting the dataset](SplitDataset.py)
+4) [Display Images](DisplayImages.py)
+5) [Custom Dataset](MyClass.py)
+6) [UNet Model](UNetModel.py)
 
 :arrow_right: **Data Formats:**
 
