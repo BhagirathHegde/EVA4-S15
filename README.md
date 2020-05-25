@@ -103,5 +103,5 @@ for child in model.children():
 - I tried with quite a few loss functions:
   1) MSELoss() - Did not give good results
   2) CrossEntropyLoss() - Did not fit best for our dataset images
-  3) BCEWithLogitsLoss() - This worked best for mask images and this is the loss function I used for mask images , but for depth images   it gve this kind of output: ![BCEWithLogitsLoss_for_depth](BCE.PNG)
+  3) BCEWithLogitsLoss() - This worked best for mask images and this is the loss function I used for mask images , but for depth images   it gve this kind of output: ![BCEWithLogitsLoss_ForDepth](BCE.PNG)
 
