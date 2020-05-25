@@ -8,7 +8,7 @@
 
 :arrow_right: **Data Formats:**
 
-All our images are in .jpg format
+- All our images are in .jpg format
 This was done to keep our dataset to a minimum size for further computations.
 
 :arrow_right: **Fetching the Data:** :hammer_and_pick:
@@ -39,7 +39,7 @@ bg = sorted(glob.glob('/content/Background/*',recursive=True))
 :arrow_right: **Custom Dataset class:** :scroll:
 - I wrote a class named CustomDataset
 - It contains __init__ method to initialise the transforms and also the 4 file paths which were created with the 4 types of files
-- Also containts __len__ to store fg_bg length
+- Also containts __len__ to store fg_bg length :straight_ruler:
 - The __getitem__ function containts 'bg_index' which makes sure that each of the 100 background images is mapped to each of the fg-bg, fg-bg-mask and depth images
 - This was done by using: bg_index = index//4000 (i.e for 1 bg images 4000 fg-bg (and mask and depth) would be mapped)
 - Also if any transforms were available, the transforms would be applied to the images at this point in the code
@@ -48,31 +48,31 @@ bg = sorted(glob.glob('/content/Background/*',recursive=True))
 - I did not use too many transforms
 - Just used resize to first run the model on 64x64 size images
 - Then changed the resize function to 224x224 image size, this was done so that I experiment on small resolution images first and then     go for the bigger ones
-- Apart from that I have added ColorJitter()
+- Apart from that I have added ColorJitter() :tada:
 - Normalised with the mean and std of Fg-Bg images which we had calculated for the previous assignment
 - At last converted to ToTensor
 
 :arrow_right: **Train Test Split:** :scissors:
 - So the requirement was to split the whole 400k dataset into 70:30 :: train:test
 - As we had also done this for imagenet dataset in previous assignment, I implemented it in the same way
-- First I split the len() of whole dataset into 70% and then the remaining 30% would be the test data
+- First I split the len() of whole dataset into 70% and then the remaining 30% would be the test data :bar_chart:
 - Then after this I ran random_split() functionality on these 70:30 split images - to generate random images for test and train
-- However, this was generating random images for every batch and so I had to use SEED: timetorch.manual_seed(0) so that a fixed set of images are generated per batch
+- However, this was generating random images for every batch and so I had to use SEED: ```timetorch.manual_seed(0)``` so that a fixed     set of images are generated per batch
 - And then applied random_split() after SEED
 
 :arrow_right: **Dataloader:** :repeat: 
 - To load the data I called the DataLoader item twice - once for train set and once for validation set
 - First, I experimented for images of size (resized) 64x64 (to test with reduced size images) - for this I gave a larger batch_size of about 128
-- This worked well , and was faster
+- This worked well , and was faster :thumbsup:
 - Then as for transfer learning, I did not resize the images but had to reduce batch_size greatly and made it 32 (so that cuda does not run out of memory)
-- This completed the data loading process 
+- This completed the data loading process :relieved: 
 
 :arrow_right: **UNet model:** :boom:
 - Link to my model: 
 - So after trying various models available, I choose to work with UNet model :heavy_check_mark:
 - I tried using ResNet like our previous assignments and also various types of Autoencoders - but the results never looked good and I had lot of difficulties dealing with the input data
 - UNet is also an encoder-decoder model useful for detecting very minute data in medical field like tumur and cell detection.Hence it     proved to be perfect to detect masks and depth images
-- There is no dense layer in UNet model, so images of different sizes can be used as input - So I first tried running the model on 64x64 size images and then switched to the 224x224 images of our dataset (transfer learning)
+- There is no dense layer in UNet model, so images of different sizes can be used as input - So I first tried running the model on 64x64 size images and then switched to the 224x224 images of our dataset (transfer learning) :trollface:
 - The only change I had to make was pass two images in the model summary instead of one (which we were passing earlier)
 ```summary(model, input_size=[(3,64,64),(3,64,64)])```
 - **No. of parameters: 33,389,314** :stuck_out_tongue:
