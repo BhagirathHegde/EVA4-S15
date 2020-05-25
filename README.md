@@ -51,7 +51,12 @@ This was done to keep our dataset to a minimum size for further computations.
 
 :arrow_right: **UNet model:**
 - Link to my model: 
-- So after trying various model available, I choose to work with UNet model
+- So after trying various models available, I choose to work with UNet model
+- I tried using ResNet like our previous assignments and also various types of Autoencoders - but the results never looked good and I had lot of difficulties dealing with the input data
+- UNet is also and encoder-decoder model and I choose this because it is used to predict very minute data in medical field like tumur and cell detection
+- No dense layer in UNet model, so images of different sizes can be used as input - So I first tried running the model on 64x64 size images and then switched to the 224x224 images of our dataset (transfer learning)
+- The only change I had to make was pass two images in the model summary instead of one (which we were passing earlier)
+```summary(model, input_size=[(3,64,64),(3,64,64)])```
 - Architecture of model:
 
 ![Architecture of model](UNet-arch.jpg)
@@ -65,19 +70,19 @@ These skip connections intend to provide local information to the global informa
 
 U-Net architecture is separated in 3 parts:
 
-1) The contracting/downsampling path
-2) Bottleneck
-3) The expanding/upsampling path
-
+  1) The contracting/downsampling path
+  2) Bottleneck
+  3) The expanding/upsampling path
 
 - However, for our assignement, I have made a few changes in the model:
-1) I first have some common layers for both depth and mask images (common layers I choose are: down1, down2 and down3)
-2) Then I split the layers into two - one set for mask and another set for depth images
-3) For this I choose the remaining layers and changed the sizes accordingly so that it duplicated the UNet architecture
-4) While running the model for depth images, I first frooze the mask layers which were newly created the ran the model and obtained the results. 
-5) While running the model for mask images, I frooze the depth layers which were newely created and ran the model to obtain results
-6) To freeze the code, used this code:
-'''
+  1) I first have some common layers for both depth and mask images (common layers I choose are: down1, down2 and down3)
+  2) Then I split the layers into two - one set for mask and another set for depth images
+  3) For this I choose the remaining layers and changed the sizes accordingly so that it duplicated the UNet architecture
+  4) While running the model for depth images, I first frooze the mask layers which were newly created the ran the model and obtained     the results. 
+  5) While running the model for mask images, I frooze the depth layers which were newely created and ran the model to obtain results
+  6) To freeze the code, used this code:
+  
+```
 #Freeze the layers
 count = 0
 for child in model.children():
@@ -85,7 +90,8 @@ for child in model.children():
    if count < 4 or count > 10:
      for param in child.parameters():
          param.requires_grad = False
-'''
+```
+
 7) Finally the model would return logits_mask if we are running model for mask images or it would return logits_depth if we are running model for depth images
 - So this is all about the model. It was not that easy, with a lot of research and trail and error these changes were made :performing_arts:
 
