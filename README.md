@@ -42,11 +42,10 @@ bg = sorted(glob.glob('/content/Background/*',recursive=True))
 - Also containts __len__ to store fg_bg length
 - The __getitem__ function containts 'bg_index' which makes sure that each of the 100 background images is mapped to each of the fg-bg, fg-bg-mask and depth images
 - This was done by using: bg_index = index//4000 (i.e for 1 bg images 4000 fg-bg (and mask and depth) would be mapped)
-- Code snippet:
 - Also if any transforms were available, the transforms would be applied to the images at this point in the code
 
 :arrow_right: **Albumentations:** :rainbow:
-- I did not huge any heavy or too many transforms
+- I did not use too many transforms
 - Just used resize to first run the model on 64x64 size images
 - Then changed the resize function to 224x224 image size, this was done so that I experiment on small resolution images first and then     go for the bigger ones
 - Apart from that I have added ColorJitter()
@@ -62,7 +61,7 @@ bg = sorted(glob.glob('/content/Background/*',recursive=True))
 - And then applied random_split() after SEED
 
 :arrow_right: **Dataloader:** 
-- Then called the DataLoader item twice - once for train set and once for validation set
+- To load the data I called the DataLoader item twice - once for train set and once for validation set
 - First, I experimented for images of size (resized) 64x64 (to test with reduced size images) - for this I gave a larger batch_size of about 128
 - This worked well , and was faster
 - Then as for transfer learning, I did not resize the images but had to reduce batch_size greatly and made it 32 (so that cuda does not run out of memory)
@@ -72,8 +71,8 @@ bg = sorted(glob.glob('/content/Background/*',recursive=True))
 - Link to my model: 
 - So after trying various models available, I choose to work with UNet model
 - I tried using ResNet like our previous assignments and also various types of Autoencoders - but the results never looked good and I had lot of difficulties dealing with the input data
-- UNet is also and encoder-decoder model and I choose this because it is used to predict very minute data in medical field like tumur and cell detection
-- No dense layer in UNet model, so images of different sizes can be used as input - So I first tried running the model on 64x64 size images and then switched to the 224x224 images of our dataset (transfer learning)
+- UNet is also an encoder-decoder model useful for detecting very minute data in medical field like tumur and cell detection.Hence it     proved to be perfect to detect masks and depth images
+- There is no dense layer in UNet model, so images of different sizes can be used as input - So I first tried running the model on 64x64 size images and then switched to the 224x224 images of our dataset (transfer learning)
 - The only change I had to make was pass two images in the model summary instead of one (which we were passing earlier)
 ```summary(model, input_size=[(3,64,64),(3,64,64)])```
 - **No. of parameters: 33,389,314**
@@ -100,9 +99,9 @@ U-Net architecture is separated in 3 parts:
   1) I first have some common layers for both depth and mask images (common layers I choose are: down1, down2 and down3)
   2) Then I split the layers into two - one set for mask and another set for depth images
   3) For this I choose the remaining layers and changed the sizes accordingly so that it duplicated the UNet architecture
-  4) While running the model for depth images, I first frooze the mask layers which were newly created the ran the model and obtained     the results. 
+  4) While running the model for depth images, I first frooze the mask layers which were newly created then ran the model and obtained     the results. 
   5) While running the model for mask images, I frooze the depth layers which were newely created and ran the model to obtain results
-  6) To freeze the code, used this code:
+  6) To freeze the code, I used this code:
   
 ```
 #Freeze the layers
@@ -148,8 +147,8 @@ scheduler = OneCycleLR(optim, max_lr = 0.02, total_steps=None, epochs=30, steps_
 - But as soon as I started running the 4th epoch, the disk space in colab starting running out of memory and after a lot of training,     it crashed and the epoch just stopped in between
 - I was clueless as to why this was happening as this never happened before
 - Then I used **timeit** to check which part of my code in tarining is taking too long
-- After a few trial and errors, I realised this was happening due to the weights being saved every few seconds - this was loading the       colab disk and crashing as soon as the disk was full
-- I then changed the condition in train() and mended it to save lesser number of times
+- After a few trial and errors, I realised this was happening due to the weights being saved every few seconds - this was loading the     colab disk and crashing as soon as the disk was full
+- I then changed the condition in train() and edited it to save lesser number of times
 ```
 if batch_idx % 2000 == 0:
         torch.save(model.state_dict(), PATH/f"{batch_idx}.pth")
@@ -185,6 +184,6 @@ model.load_state_dict(torch.load('/content/gdrive/My Drive/model_mask_1.pth'))
   
 ![GT]()                                                ![Testing]()
 
-:end: At the end I just prayed that all goes well and this project turns out to be a huge learning path and helps me cross many more hurdles in life :pray:
+:end: At the end I just prayed that all goes well. This project turned out to be a huge learning path. It will definetly help me cross many more hurdles in life :pray:
 
 Thank you so much :blush:
