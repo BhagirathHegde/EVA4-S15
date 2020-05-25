@@ -4,6 +4,8 @@
 
 :arrow_right: Link to how the Dataset was created: https://github.com/Deeksha-Pandit/EVA4-S14/blob/master/Final/README.md 
 
+:arrow_right: **Files Used:**
+
 :arrow_right: **Data Formats:**
 
 All our images are in .jpg format
@@ -48,9 +50,28 @@ This was done to keep our dataset to a minimum size for further computations.
 - This completed the data loading process 
 
 :arrow_right: **UNet model:**
+- Link to my model: 
 - So after trying various model available, I choose to work with UNet model
 - Architecture of model:
-![Architecture of model:](UNet-arch.jpg)
+
+The U-Net architecture is built upon the Fully Convolutional Network and modified in a way that it yields better segmentation in medical imaging. Compared to FCN-8, the two main differences are 
+
+(1) U-net is symmetric and  
+(2) the skip connections between the downsampling path and the upsampling path apply a concatenation operator instead of a sum. 
+These skip connections intend to provide local information to the global information while upsampling. Because of its symmetry, the network has a large number of feature maps in the upsampling path, which allows to transfer information. By comparison, the basic FCN architecture only had number of classes feature maps in its upsampling path.
+
+The U-Net owes its name to its symmetric shape, which is different from other FCN variants.
+
+U-Net architecture is separated in 3 parts:
+
+1) The contracting/downsampling path
+2) Bottleneck
+3) The expanding/upsampling path
+
+![Architecture of model:] (UNet-arch.jpg)
+
+- However, for our assignement, I have made a few changes in the model:
+
 
 
 :arrow_right: **Display Images:**
