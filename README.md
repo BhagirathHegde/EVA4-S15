@@ -100,8 +100,30 @@ for child in model.children():
 - In these functions we load each of the 4 types of images (background, fg-bg, fg-bg-mask and depth images)
 - And then here comes another hurdle................ :construction:
 - We had to decide upon the hyperparameters for the training and testing, that would work perfectly with our model :thinking:
+**LOSS FUNCTIONS**
 - I tried with quite a few loss functions:
   1) MSELoss() - Did not give good results
   2) CrossEntropyLoss() - Did not fit best for our dataset images
-  3) BCEWithLogitsLoss() - This worked best for mask images and this is the loss function I used for mask images , but for depth images   it gve this kind of output: ![BCEWithLogitsLoss_ForDepth](BCE.PNG)
-
+  3) BCEWithLogitsLoss() - This worked best for mask images and this is the loss function I used for mask images , but for depth images   it gave this kind of output even after a few epochs: ![BCEWithLogitsLoss_ForDepth](BCE.PNG)
+  4) L1Loss() - Then I realised I have to use different loss functions for both depth and mask images and planned to go with L1Loss()     for depth images and this worked well  
+- Also, I used the same optimizer (with momentum and weight decay) and schedular as used in previous assignment, so this helped me speed   up the process 
+Code Snippet:
+```
+optim = torch.optim.SGD(model.parameters(), lr=0.01,momentum=0.9,weight_decay = 0.0001) 
+#criterion = nn.L1Loss()                #Used for depth images
+criterion = nn.BCEWithLogitsLoss()      #Used for mask images
+scheduler = OneCycleLR(optim, max_lr = 0.02, total_steps=None, epochs=30, steps_per_epoch=len(train_dataloader), pct_start=1/3, anneal_strategy='linear', cycle_momentum=True, base_momentum=0.85, max_momentum=0.95, div_factor=10.0,final_div_factor =10)
+```
+:heavy_exclamation_mark: So then, just when I thought everything is in place and now my life will be simpler.......
+- I started training for depth images first as you can see by the outputs in the .ipynb 
+- It ran perfectly for 3 epochs and also gave me good results
+- But as soon as I started running the 4th epoch, the disk space in colab starting running out of memory and after a lot of training,     it crashed and the epoch just stopped in between
+- I was clueless as to why this was happening as this never happened before
+- Then I used **timeit** to check which part of my code in tarining is taking too long
+- After a few trial and errors, I realised this was happening due to the weights being saved every few seconds - this was loading the       colab disk and crashing as soon as the disk was full
+- I then changed the condition in train() and mended it to save lesser number of times
+```
+if batch_idx % 2000 == 0:
+        torch.save(model.state_dict(), PATH/f"{batch_idx}.pth")
+```
+- This worked but still another major issue I faced was in training time - It took me almost a day or more to train and test my dataset for the outputs :tired_face: 
