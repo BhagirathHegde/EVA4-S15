@@ -117,6 +117,11 @@ for child in model.children():
 - Finally the model would return logits_mask if we are running model for mask images or it would return logits_depth if we are running model for depth images
 - So this is all about the model. It was not that easy, with a lot of research and trail and error these changes were made :performing_arts:
 
+:arrow_right: **Display Images:**
+- Wrote a small function to display the images of any kind by just calling the display_image(img) function
+- Example of fg-bg images:  1[fg-bg](fg-bg-image)
+
+
 :arrow_right: **Train and Test:**
 - Train and test functions do not change much, they are similar to what we used in previous assignments
 - In these functions we load each of the 4 types of images (background, fg-bg, fg-bg-mask and depth images)
