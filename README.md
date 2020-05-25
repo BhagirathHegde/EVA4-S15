@@ -11,12 +11,12 @@
 All our images are in .jpg format
 This was done to keep our dataset to a minimum size for further computations.
 
-:arrow_right: **Fetching the Data:**
+:arrow_right: **Fetching the Data:** :hammer_and_pick:
 - So the biggest challenge of this assignment was how to load such huge amount of data :question:
 - First, I tried to load a small amount of data (say 20 images of each kind) into colab
 - Then I tried to convert them into numpy arrays and tried to store them in a list - since we have to input 4 kind of images
 - After storing in a list, when I tried to retrieve the images via these numpy arrays, I landed up in a lot of errors due to channel mis-match and resizing issues
-- This created a lot of confusion and I thought I would give up on the whole assignment because I was stuck with errors for days
+- This created a lot of confusion and I thought I would give up on the whole assignment because I was stuck with errors for days :coffin:
 - Then I decided to finally change my approach and restarted the whole assignment from scratch
 - This time I thought of loading the paths of the dataset into colab instead of saving them in a list and converting to arrays etc
 - I stored the paths of the 4 kinds of images in variables and extracted each of these paths locally into colab
@@ -69,13 +69,13 @@ bg = sorted(glob.glob('/content/Background/*',recursive=True))
 
 :arrow_right: **UNet model:** :boom:
 - Link to my model: 
-- So after trying various models available, I choose to work with UNet model
+- So after trying various models available, I choose to work with UNet model :heavy_check_mark:
 - I tried using ResNet like our previous assignments and also various types of Autoencoders - but the results never looked good and I had lot of difficulties dealing with the input data
 - UNet is also an encoder-decoder model useful for detecting very minute data in medical field like tumur and cell detection.Hence it     proved to be perfect to detect masks and depth images
 - There is no dense layer in UNet model, so images of different sizes can be used as input - So I first tried running the model on 64x64 size images and then switched to the 224x224 images of our dataset (transfer learning)
 - The only change I had to make was pass two images in the model summary instead of one (which we were passing earlier)
 ```summary(model, input_size=[(3,64,64),(3,64,64)])```
-- **No. of parameters: 33,389,314**
+- **No. of parameters: 33,389,314** :stuck_out_tongue:
 - Architecture of model:
 
 ![Architecture of model](UNet-arch.jpg)
@@ -97,7 +97,7 @@ U-Net architecture is separated in 3 parts:
 
 :sunglasses: However, for our assignement, I have made a few changes in the model:
   1) I first have some common layers for both depth and mask images (common layers I choose are: down1, down2 and down3)
-  2) Then I split the layers into two - one set for mask and another set for depth images
+  2) Then I split the layers into two - one set for mask and another set for depth images :coffee:
   3) For this I choose the remaining layers and changed the sizes accordingly so that it duplicated the UNet architecture
   4) While running the model for depth images, I first frooze the mask layers which were newly created then ran the model and obtained     the results. 
   5) While running the model for mask images, I frooze the depth layers which were newely created and ran the model to obtain results
@@ -132,7 +132,7 @@ for child in model.children():
   2) CrossEntropyLoss() - Did not fit best for our dataset images
   3) BCEWithLogitsLoss() - This worked best for mask images and this is the loss function I used for mask images , but for depth images   it gave this kind of output even after a few epochs: ![BCEWithLogitsLoss_ForDepth](BCE.PNG)
   4) L1Loss() - Then I realised I have to use different loss functions for both depth and mask images and planned to go with L1Loss()     for depth images and this worked well  
-- Also, I used the same optimizer (with momentum and weight decay) and schedular as used in previous assignment, so this helped me speed   up the process 
+- Also, I used the same optimizer (with momentum and weight decay) and schedular as used in previous assignment, so this helped me speed   up the process :dart: 
 
 Code Snippet:
 ```
@@ -144,9 +144,9 @@ scheduler = OneCycleLR(optim, max_lr = 0.02, total_steps=None, epochs=30, steps_
 :heavy_exclamation_mark: So then, just when I thought everything is in place and now my life will be simpler.......
 - I started training for depth images first as you can see by the outputs in the .ipynb 
 - It ran perfectly for 3 epochs and also gave me good results
-- But as soon as I started running the 4th epoch, the disk space in colab starting running out of memory and after a lot of training,     it crashed and the epoch just stopped in between
+- But as soon as I started running the 4th epoch, the disk space in colab starting running out of memory and after a lot of training,     it crashed and the epoch just stopped in between :eyes:
 - I was clueless as to why this was happening as this never happened before
-- Then I used **timeit** to check which part of my code in tarining is taking too long
+- Then I used **timeit** to check which part of my code in tarining is taking too long :hourglass_flowing_sand:
 - After a few trial and errors, I realised this was happening due to the weights being saved every few seconds - this was loading the     colab disk and crashing as soon as the disk was full
 - I then changed the condition in train() and edited it to save lesser number of times
 ```
