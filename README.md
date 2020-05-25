@@ -70,11 +70,11 @@ These skip connections intend to provide local information to the global informa
 
 U-Net architecture is separated in 3 parts:
 
-  1) The contracting/downsampling path
-  2) Bottleneck
-  3) The expanding/upsampling path
+  :small_blue_diamond: The contracting/downsampling path
+  :small_blue_diamond: Bottleneck
+  :small_blue_diamond: The expanding/upsampling path
 
-- However, for our assignement, I have made a few changes in the model:
+:sunglasses: However, for our assignement, I have made a few changes in the model:
   1) I first have some common layers for both depth and mask images (common layers I choose are: down1, down2 and down3)
   2) Then I split the layers into two - one set for mask and another set for depth images
   3) For this I choose the remaining layers and changed the sizes accordingly so that it duplicated the UNet architecture
@@ -100,13 +100,14 @@ for child in model.children():
 - In these functions we load each of the 4 types of images (background, fg-bg, fg-bg-mask and depth images)
 - And then here comes another hurdle................ :construction:
 - We had to decide upon the hyperparameters for the training and testing, that would work perfectly with our model :thinking:
-**LOSS FUNCTIONS**
+**LOSS FUNCTIONS:**
 - I tried with quite a few loss functions:
   1) MSELoss() - Did not give good results
   2) CrossEntropyLoss() - Did not fit best for our dataset images
   3) BCEWithLogitsLoss() - This worked best for mask images and this is the loss function I used for mask images , but for depth images   it gave this kind of output even after a few epochs: ![BCEWithLogitsLoss_ForDepth](BCE.PNG)
   4) L1Loss() - Then I realised I have to use different loss functions for both depth and mask images and planned to go with L1Loss()     for depth images and this worked well  
 - Also, I used the same optimizer (with momentum and weight decay) and schedular as used in previous assignment, so this helped me speed   up the process 
+
 Code Snippet:
 ```
 optim = torch.optim.SGD(model.parameters(), lr=0.01,momentum=0.9,weight_decay = 0.0001) 
@@ -127,3 +128,20 @@ if batch_idx % 2000 == 0:
         torch.save(model.state_dict(), PATH/f"{batch_idx}.pth")
 ```
 - This worked but still another major issue I faced was in training time - It took me almost a day or more to train and test my dataset for the outputs :tired_face: 
+
+At the end I also used save and load codes for saving the weights of my model to drive after every epoch and load it back for the next epoch - in order to train in a better way :muscle:
+
+Code Snippet:
+```
+torch.save(model, '/content/gdrive/My Drive/model_mask_1.pth')
+model.load_state_dict(torch.load('/content/gdrive/My Drive/model_mask_1.pth'))
+```
+:arrow_right: **Outputs:**
+
+DEPTH - Ground truth and Output for training (epoch 4)
+
+![GT]()
+
+:end: At the end I just prayed that all goes well and this project turns out to be a huge learning path and helps me cross many more hurdles in life :pray:
+
+Thank you so much :blush:
