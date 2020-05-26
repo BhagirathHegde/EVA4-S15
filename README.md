@@ -20,8 +20,12 @@
     - Depth Images
  4) Model - UNet 
  5) No. of parameters - 33,389,314
- 6) Epochs - Depth: 4 epochs , Masks: 3 epochs
- 7) Iou Results ~ 0.8109732806682587
+ 6) Loss Function for Mask images: BCEWithLogitsLoss()
+ 7) Loss Function for Depth images: L1Loss()
+ 8) Optimizer: SGD with momentum and weight decay
+ 9) Scheduler: OneCycleLR()
+ 10) Epochs - Depth: 4 epochs , Masks: 3 epochs
+ 11) Iou Results ~ 0.8109732806682587
 
 :arrow_right: **Files Used:**
 1) [All Models](my_model.py) - Contains all models used in EVA4 until now
